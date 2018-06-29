@@ -2,7 +2,7 @@
 
 
 项目目录
-
+```
 |-dist          // 打包后的文件
 |-node_modules  // npm包
 |-public        // 公共文件，主要存放index.html
@@ -24,3 +24,4 @@
 |- .eslintrc.js      // eslint 配置
 |- .postcssrc.js     // postcss 配置
 |- babel.config.js   // babel 配置
+```
