@@ -10,7 +10,7 @@
     }
   }
 */
-import Home from './Home.vue'
+import Home from '../views/Home.vue'
 
 export default [
   {
