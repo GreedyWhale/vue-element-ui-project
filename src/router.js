@@ -10,12 +10,20 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      beforeEnter: (to, from, next) => {
+        document.title = '首页'
+        next()
+      }
     },
     {
       path: '/about',
       name: 'about',
-      component: About
+      component: About,
+      beforeEnter: (to, from, next) => {
+        document.title = '关于'
+        next()
+      }
     }
   ]
 })
