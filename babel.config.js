@@ -1,12 +1,6 @@
 module.exports = {
   presets: [
-    '@vue/app',
-    ['env', {
-      'modules': false,
-      'targets': {
-        'browsers': ['> 1%', 'last 2 versions', 'not ie <= 8']
-      }
-    }]
+    '@vue/app'
   ],
   'plugins': [
     [
@@ -15,6 +9,7 @@ module.exports = {
         'libraryName': 'element-ui',
         'styleLibraryName': 'theme-chalk'
       }
-    ]
+    ],
+    '@babel/plugin-transform-runtime'
   ]
 }
