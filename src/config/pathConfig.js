@@ -10,13 +10,12 @@
     }
   }
 */
-import Home from '../views/Home.vue'
 
 export default [
   {
     path: '/',
     name: 'home',
-    component: Home,
+    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
     beforeEnter: (to, from, next) => {
       document.title = '首页'
       next()
