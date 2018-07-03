@@ -1,5 +1,10 @@
 import axios from 'axios'
 import { filterResponse } from './filterResponse'
+import { filterStatusCode } from './filterStatusCode'
+import { closeLoading } from './closeLoading'
+import { Loading } from 'element-ui'
+
+let isLoading
 
 const Axios = axios.create({
   baseURL: process.env.VUE_APP_API_ROOT,
@@ -15,22 +20,35 @@ Axios.defaults.retry = 3
 Axios.defaults.retryDelay = 10000
 
 Axios.interceptors.request.use(
-  config => config,
+  config => {
+    isLoading = config.isLoading || false
+    if (!isLoading) {
+      isLoading = Loading.service({
+        text: '拼命加载中',
+        background: 'rgba(0, 0, 0, 0.8)'
+      })
+    }
+    return config
+  },
   error => {
     return Promise.reject(error)
   }
 )
 Axios.interceptors.response.use(
   response => {
+    closeLoading(isLoading)
     return filterResponse(response)
   },
   error => {
     if (error.message && error.message.match(/timeout/)) {
       const config = error.config
-      if (!config || !config.retry) return Promise.reject(error)
-      if (config.method === 'post') return Promise.reject(error)
+      if (!config || !config.retry || config.method === 'post') {
+        closeLoading(isLoading)
+        return Promise.reject(error)
+      }
       config.__retryCount = config.__retryCount || 0
       if (config.__retryCount >= config.retry) {
+        closeLoading(isLoading)
         return Promise.reject(error)
       }
       config.__retryCount += 1
@@ -43,6 +61,8 @@ Axios.interceptors.response.use(
         return Axios(config)
       })
     }
+    closeLoading(isLoading)
+    filterStatusCode(error)
     return Promise.reject(error)
   }
 )

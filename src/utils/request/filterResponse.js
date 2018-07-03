@@ -1,5 +1,5 @@
 import Router from 'vue-router'
-import { Message } from 'element-ui'
+import { showDialog } from '../dialog'
 
 const router = new Router()
 
@@ -9,20 +9,12 @@ const filterResponse = response => {
       case 1:
         return Promise.resolve(response.data)
       case 2:
-        Message({
-          showClose: true,
-          message: response.data.msg,
-          type: 'error'
-        })
+        showDialog(response.data.msg)
         return Promise.reject(response.data)
       case 13:
-        return router.push({ name: 'login' })
+        return router.push({ path: '/login' })
       default:
-        Message({
-          showClose: true,
-          message: response.data.msg,
-          type: 'error'
-        })
+        showDialog(response.data.msg)
         return Promise.reject(response.data)
     }
   }
