@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <el-button>123</el-button>
+    
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import { Axios } from '../utils/methods'
 export default {
   created () {
-    Axios.get('/example/1526737193301')
+    Axios.post('api/login', {})
       .catch(error => {
         console.log(error)
       })

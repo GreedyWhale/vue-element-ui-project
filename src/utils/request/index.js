@@ -3,6 +3,7 @@ import { filterResponse } from './filterResponse'
 import { filterStatusCode } from './filterStatusCode'
 import { closeLoading } from './closeLoading'
 import { Loading } from 'element-ui'
+import { TOKEN } from '../constant'
 
 let isLoading
 
@@ -28,6 +29,9 @@ Axios.interceptors.request.use(
         background: 'rgba(0, 0, 0, 0.8)'
       })
     }
+    if (window.localStorage.getItem(TOKEN)) {
+      config.headers.Authorization = window.localStorage.getItem(TOKEN)
+    }
     return config
   },
   error => {
@@ -36,19 +40,19 @@ Axios.interceptors.request.use(
 )
 Axios.interceptors.response.use(
   response => {
-    closeLoading(isLoading)
+    isLoading = closeLoading(isLoading)
     return filterResponse(response)
   },
   error => {
     if (error.message && error.message.match(/timeout/)) {
       const config = error.config
       if (!config || !config.retry || config.method === 'post') {
-        closeLoading(isLoading)
+        isLoading = closeLoading(isLoading)
         return Promise.reject(error)
       }
       config.__retryCount = config.__retryCount || 0
       if (config.__retryCount >= config.retry) {
-        closeLoading(isLoading)
+        isLoading = closeLoading(isLoading)
         return Promise.reject(error)
       }
       config.__retryCount += 1
@@ -61,7 +65,7 @@ Axios.interceptors.response.use(
         return Axios(config)
       })
     }
-    closeLoading(isLoading)
+    isLoading = closeLoading(isLoading)
     filterStatusCode(error)
     return Promise.reject(error)
   }
