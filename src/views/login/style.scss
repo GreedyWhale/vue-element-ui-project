@@ -1,0 +1,76 @@
+.container {
+  background: url('../../assets/images/login/login_bg.jpg') no-repeat center / 100% 100%;
+  height: 100vh;
+  justify-content: center;
+  font-size: 16px;
+  color: #fff;
+  .login-box {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 8px;
+    .tab-wrap {
+      margin-bottom: 20px;
+      & > li{
+        padding: 0 20px;
+        flex: 1;
+        align-items: center;
+        position: relative;
+        line-height: 40px;
+        text-align: center;
+        cursor: pointer;
+        &:hover {
+          color: #69b3fc;
+        }
+        &::after {
+          content: '';
+          display: block;
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          right: 0;
+          height: 2px;
+          background: transparent;
+        }
+        &.active::after {
+          background: #69b3fc;
+        }
+      }
+    }
+    .input {
+      margin-bottom: 20px;
+      width: 400px;
+      .input-icon {
+        width: 1em;
+        height: 1em;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+    .remember-me {
+      display: block;
+      margin-bottom: 20px;
+    }
+    .login-in-button {
+      width: 100%;
+    }
+    .get-auth-code-button {
+      flex: none;
+      margin-left: 20px;
+    }
+    .error-tip {
+      color: rgb(224, 59, 59);
+      margin-bottom: 20px;
+      .error-tip-icon {
+        fill: rgb(224, 59, 59);
+        width: 1em;
+        height: 1em;
+        margin-right: 10px;
+      }
+    }
+  }
+}
+.flex-center {
+  display: flex;
+  align-items: center
+}

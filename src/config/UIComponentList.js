@@ -1,4 +1,6 @@
-import { Input } from 'element-ui'
+import { Button, Input, Checkbox } from 'element-ui'
 export default [
-  Input
+  Button,
+  Input,
+  Checkbox
 ]

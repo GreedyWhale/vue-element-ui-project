@@ -11,7 +11,7 @@
   }
 */
 const Home = () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
-const Login = () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
+const Login = () => import(/* webpackChunkName: "login" */ '../views/login/index.vue')
 
 export default [
   {
