@@ -1,4 +1,5 @@
 import axios from 'axios'
+import qs from 'qs'
 import { filterResponse } from './filterResponse'
 import { filterStatusCode } from './filterStatusCode'
 import { closeLoading } from './closeLoading'
@@ -8,13 +9,14 @@ import { TOKEN } from '../constant'
 let isLoading
 
 const Axios = axios.create({
-  baseURL: process.env.VUE_APP_API_ROOT,
+  baseURL: location.origin,
   timeout: 10000,
   responseType: 'json',
   withCredentials: true,
   headers: {
-    'Content-Type': 'application/json;charset=utf-8'
-  }
+    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+  },
+  transformRequest: [data => qs.stringify(data)]
 })
 
 Axios.defaults.retry = 3
