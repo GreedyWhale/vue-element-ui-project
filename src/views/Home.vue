@@ -5,10 +5,9 @@
 </template>
 
 <script>
-import { Axios } from '../utils/methods'
 export default {
   created () {
-    Axios.post('/toop_console/login_login', {
+    this.ajax.post('/toop_console/login_login', {
       userName: 'admin',
       password: 654321,
       remember: 'No'

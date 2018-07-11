@@ -4,7 +4,9 @@ import router from './router'
 import store from './store'
 import UIComponentList from './config/UIComponentList'
 import './assets/css/reset.scss'
+import AxiosPlugin from './utils/request/index'
 
+Vue.use(AxiosPlugin)
 UIComponentList.forEach((component) => { Vue.use(component) })
 
 Vue.config.productionTip = false

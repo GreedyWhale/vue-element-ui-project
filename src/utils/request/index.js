@@ -73,4 +73,8 @@ Axios.interceptors.response.use(
   }
 )
 
-export { Axios }
+export default {
+  install: function (Vue, Option) {
+    Object.defineProperty(Vue.prototype, 'ajax', { value: Axios })
+  }
+}
