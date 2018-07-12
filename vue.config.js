@@ -1,17 +1,26 @@
+
 module.exports = {
+  baseUrl: process.env.VUE_APP_DOMAIN,
   devServer: {
     open: true,
-    host: '0.0.0.0',
-    port: 12345,
+    port: 3000,
+    hot: true,
     https: true,
-    hotOnly: true,
+    host: 'localhost',
+    compress: true,
     proxy: {
       '/toop_console': {
-        target: 'https://stagingmis.innmall.cn/toop_console/',
+        target: '',
         changeOrigin: true,
-        secure: true,
+        secure: false,
         pathRewrite: {
           '^/toop_console': ''
+        },
+        bypass: function (req, res, proxyOptions) {
+          if (req.headers.accept.indexOf('html') !== -1) {
+            console.log('Skipping proxy for browser request.')
+            return './public/index.html'
+          }
         }
       }
     }
