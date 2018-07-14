@@ -10,7 +10,7 @@ module.exports = {
     compress: true,
     proxy: {
       '/toop_console': {
-        target: '',
+        target: 'https:xxx',
         changeOrigin: true,
         secure: false,
         pathRewrite: {
